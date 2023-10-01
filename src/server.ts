@@ -1,7 +1,14 @@
 import express, { Request, Response, NextFunction } from "express";
-
+import cors from "cors";
 const app = express();
 app.use(express.json());
+app.use(
+  cors({
+    // origin: ["https://www.section.io", "https://www.google.com"],
+    methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
+  })
+);
+
 const PORT = 8000;
 
 app.listen(PORT, () => {
