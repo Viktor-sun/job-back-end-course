@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import helmet from "helmet";
+import mongoose from "mongoose";
 
 const app = express();
 app.use(express.json());
@@ -11,6 +12,14 @@ app.use(
   })
 );
 app.use(helmet());
+
+// connect mongo test
+const db = mongoose.connect("mongodb://mongodb:27017");
+db.then(() => {
+  console.log(`Mongo is here`);
+}).catch((e) => {
+  console.log(`Error: ${e.message}`);
+});
 
 const PORT = 8000;
 

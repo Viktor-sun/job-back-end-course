@@ -1,0 +1,33 @@
+version: "2.22"
+
+services:
+  node-express-app:
+    build: .
+    restart: always
+    # image: express-app
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+    # volumes:
+    #   - .:/src
+    networks:
+      - node-network
+
+  mongodb:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - dbdata6:/data/db
+    networks:
+      - node-network
+volumes:
+  dbdata6:
+
+networks:
+  node-network:
+    driver: bridge
