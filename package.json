@@ -1,0 +1,26 @@
+{
+  "name": "job-back-end-course",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Viktor-sun/job-back-end-course.git",
+  "author": "Viktor-sun <bobick.zdoh@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.14",
+    "@types/express": "^4.17.18",
+    "@types/node": "^20.7.0",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "scripts": {
+    "start": "yarn build && node ./dist/server.js",
+    "dev": "nodemon ./src/server.ts",
+    "build": "tsc --project ./"
+  }
+}

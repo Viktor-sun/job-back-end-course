@@ -1,0 +1,7 @@
+{
+  "ignore": ["node_modules"],
+  "ext": "ts",
+  "execMap": {
+    "ts": "ts-node-esm"
+  }
+}
