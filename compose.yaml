@@ -4,13 +4,11 @@ services:
   node-express-app:
     build: .
     restart: always
-    # image: express-app
-    environment:
-      - MONGODB_URL=mongodb://mongodb:27017
     ports:
       - "8000:8000"
     depends_on:
       - mongodb
+      - postgresdb
     # volumes:
     #   - .:/src
     networks:
@@ -19,15 +17,31 @@ services:
   mongodb:
     image: mongo
     restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
     ports:
       - "27017:27017"
-    volumes:
-      - dbdata6:/data/db
+    # volumes:
+    #   - dbdata6:/data/db
     networks:
       - node-network
-volumes:
-  dbdata6:
 
+  postgresdb:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=example
+      - POSTGRES_DB=mydb
+    ports:
+      - "5432:5432"
+    # volumes:
+    #   - dbdata6:/data/db
+    networks:
+      - node-network
+# volumes:
+#   dbdata6:
 networks:
   node-network:
     driver: bridge
