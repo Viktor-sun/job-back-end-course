@@ -4,6 +4,8 @@ services:
   node-express-app:
     build: .
     restart: always
+    environment:
+      - NODE_ENV=docker
     ports:
       - "8000:8000"
     depends_on:

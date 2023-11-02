@@ -1,8 +1,9 @@
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import helmet from "helmet";
-import mongoose from "mongoose";
-import { DataSource } from "typeorm";
+import { AppDataSource } from "./model/postgresql/dataSource.js";
+import { usersRouter } from "./routes/user.js";
+// import "./model/mongodb/db.js";
 
 const app = express();
 app.use(express.json());
@@ -14,26 +15,7 @@ app.use(
 );
 app.use(helmet());
 
-// connect mongo test
-const db = mongoose.connect("mongodb://root:example@mongodb:27017");
-db.then(() => {
-  console.log(`Mongo is here`);
-}).catch((e) => {
-  console.log(`Error: ${e.message}`);
-});
-
-// connect postgres test
-export const myDataSource = new DataSource({
-  type: "postgres",
-  host: "postgresdb",
-  port: 5432,
-  username: "postgres",
-  password: "example",
-  database: "mydb",
-});
-
-myDataSource
-  .initialize()
+AppDataSource.initialize()
   .then(() => {
     console.log("Postgres is here");
   })
@@ -47,6 +29,8 @@ const PORT = 8000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}/`);
 });
+
+app.use("/users", usersRouter);
 
 type PhoneNumberType = {
   id: string;
