@@ -61,5 +61,5 @@ export class User {
   createDate: Date;
 
   @OneToMany(() => Message, (message) => message.user)
-  messages: Relation<Message>[];
+  messages: Relation<Message>[]; // use Relation in ESM projects
 }

@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import helmet from "helmet";
-import { AppDataSource } from "./model/postgresql/dataSource.js";
+import { AppDataSource } from "./dataSource.js";
 import { usersRouter } from "./routes/user.js";
 // import "./model/mongodb/db.js";
 

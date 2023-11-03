@@ -1,6 +1,6 @@
 import { validate } from "class-validator";
 import { User } from "../model/postgresql/User.js";
-import { AppDataSource } from "../model/postgresql/dataSource.js";
+import { AppDataSource } from "../dataSource.js";
 import { Request, Response, NextFunction } from "express";
 
 export const createUser = async (
