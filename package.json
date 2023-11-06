@@ -7,24 +7,37 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
+    "class-validator": "^0.14.0",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "helmet": "^7.0.0",
     "mongoose": "^7.5.3",
     "pg": "^8.11.3",
-    "typeorm": "^0.3.17"
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.17",
+    "typeorm-extension": "^3.1.1"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.2.0",
     "@types/cors": "^2.8.14",
     "@types/express": "^4.17.18",
     "@types/node": "^20.7.0",
+    "eslint": "^8.52.0",
     "nodemon": "^3.0.1",
+    "rimraf": "^5.0.5",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   },
   "scripts": {
     "start": "yarn build && node ./dist/server.js",
     "dev": "nodemon ./src/server.ts",
-    "build": "tsc --project ./"
+    "dev:old": "nodemon --exec 'node --no-warnings=ExperimentalWarning --loader ts-node/esm' src/server.ts",
+    "prebuild": "rimraf ./dist",
+    "build": "tsc --project ./",
+    "typeorm": "npx typeorm-ts-node-esm -d src/dataSource.ts",
+    "migration:generate": "yarn typeorm migration:generate",
+    "migration:run": "yarn typeorm migration:run",
+    "migration:revert": "yarn typeorm migration:revert",
+    "seed:run": "ts-node-esm ./node_modules/typeorm-extension/bin/cli.mjs seed:run  -d src/dataSource.ts"
   }
 }

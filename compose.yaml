@@ -4,6 +4,8 @@ services:
   node-express-app:
     build: .
     restart: always
+    environment:
+      - NODE_ENV=docker
     ports:
       - "8000:8000"
     depends_on:
@@ -22,8 +24,8 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=example
     ports:
       - "27017:27017"
-    # volumes:
-    #   - dbdata6:/data/db
+    volumes:
+      - dbdata:/data/db
     networks:
       - node-network
 
@@ -36,12 +38,12 @@ services:
       - POSTGRES_DB=mydb
     ports:
       - "5432:5432"
-    # volumes:
-    #   - dbdata6:/data/db
+    volumes:
+      - dbdata:/var/lib/postgresql/data
     networks:
       - node-network
-# volumes:
-#   dbdata6:
+volumes:
+  dbdata:
 networks:
   node-network:
     driver: bridge
